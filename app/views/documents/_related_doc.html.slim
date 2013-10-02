@@ -1,0 +1,5 @@
+.related-document class="is-#{document.kind} #{current ? 'is-current' : ''}"
+  .related-document-title
+    = link_to_unless_current(document.title, document_path(document))
+  .related-document-date
+    = l document.document_date

@@ -1,0 +1,4 @@
+- if user_signed_in?
+  = link_to current_user.name, edit_user_path(current_user)
+  | &nbsp;—&nbsp;
+  = link_to 'выйти', destroy_user_session_path, method: :delete, data: {confirm: 'Действительно выйти?'}

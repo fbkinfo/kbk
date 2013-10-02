@@ -1,0 +1,82 @@
+ru:
+  enumerize:
+    investigation:
+      project_kind:
+        rospil: РосПил
+        investigation: Расследование
+    user:
+      role:
+        admin: Админ
+        lawyer: Юрист
+
+  date:
+    formats:
+      default: "%d %B %Y"
+      short: "%d %B"
+      thread_short: "%d %b"
+      thread_full: "%d %b %Y"
+  time:
+    formats:
+      thread_short: "%d %b"
+      thread_full: "%d %b %Y"
+  date_range:
+    options:
+      7: За неделю
+      30: За месяц
+      45: За 45 дней
+      90: За 90 дней
+      range: Выбрать период
+  activerecord:
+    errors:
+      models:
+        document:
+          no_snapshot_or_attachement: Необходимо загрузить скан или вложение
+          not_in_investigation: не входит в выбранное расследование
+          cause_exists_in_subtree: выбранный документ уже принадлежит к цепочке ответов на редактируемый
+          document_dated_before_cause: меньше даты на документе, на который создается ответ
+    attributes:
+      video:
+        body: Код для вставки видео
+      link:
+        title: Заголовок
+        url: Адрес
+        comment: Комментарий
+      user:
+        blocked: Заблокировать для входа
+        name: Имя
+        email: E-Mail
+        password: Пароль
+        password_confirmation: Подтверждение пароля
+        role: Роль
+      organization:
+        name: Название
+      document:
+        renew_investigation_publish: Доопубликовать дело
+        document_date: Дата на документе
+        due_date: Срок ответа
+        final: Не требует ответа
+        title: Название
+        description: Описание
+        organization_id: Организация
+        investigation_id: Дело
+        user_id: Создатель
+        cause_id: Получен в ответ на документ
+        author_id: Автор
+      investigation:
+        title: Название
+        description: Описание
+        project_kind: Проект
+
+  models:
+    investigation:
+      statuses:
+        active: В процессе
+        success: Решено
+        failure: Окончательный отказ
+      action_info:
+        incoming: Получено из&nbsp;
+        outgoing: Отправлено в&nbsp;
+
+  user_mailer:
+    welcome_email:
+      subject: "Добро пожаловать в дела ФБК"

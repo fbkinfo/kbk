@@ -1,0 +1,16 @@
+article.is-form
+
+  h1.form-title.is-document-edit
+    | Дела ФБК
+
+  h2 Войдите для участия в финальной борьбе между добром и нейтралитетом
+
+  .box
+    = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      = f.input :email, required: false, autofocus: true, label: "Почта"
+      = f.input :password, required: false
+
+      .actions
+        = f.submit 'Войти', class: 'big-green-button'
+        = link_to 'Забыли пароль?', new_password_path(resource_name), class: "recover-link"
+

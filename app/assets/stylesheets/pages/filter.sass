@@ -1,0 +1,196 @@
+.list-filter
+  .list-filter-slider-block
+    background-image: linear-gradient(#F6F5F0, #F1EFE6)
+    height: 76px
+    border-bottom: 1px solid #fff
+
+    img.handle
+      position: absolute
+      cursor: move
+      z-index: 1000
+
+    .list-filter-slider
+      vertical-align: top
+      .radio-slider-item
+        label
+          font-size: 13px
+        &.is-incoming
+          label
+            color: $in-color
+            +with-icon('doc_in_red', -7px, 4px)
+          input:checked+label
+            padding-left: 28px
+            margin-left: -18px
+            background: $in-color
+            color: #fff
+            +with-icon('doc_in_white', 10px, 5px)
+
+        &.is-outgoing
+          label
+            color: $out-color
+            +with-icon('doc_out_blue', -5px, 5px)
+          input:checked+label
+            padding-left: 28px
+            margin-left: -18px
+            background: $out-color
+            color: #fff
+            +with-icon('doc_out_white', 10px, 5px)
+
+
+.list-filter-filter-buttons
+  +inline-block
+  vertical-align: top
+  margin: 18px 0 0 16px
+  label
+    font-size: 13px
+  input
+    display: none
+  .is-marked
+    .filter-button
+      +border-radius(4px 0 0 4px)
+      border-right: 1px solid #272f37
+      width: 90px
+      text-align: left
+      padding-left: 36px
+      +with-icon('star_white', 17px, 10px)
+
+  .is-no_answer
+    .filter-button
+      width: 90px
+      +border-radius(0)
+      border-left: none
+
+  .is-expired
+    .filter-button
+      width: 100px
+      +border-radius(0 4px 4px 0)
+      border-left: none
+
+  .is-published
+    .filter-button
+      width: 114px
+      +border-radius(0 4px 4px 0)
+      border-left: none
+
+.list-filter-search-form
+  +inline-block
+  margin-right: 20px
+  margin-top: 18px
+  float: right
+  div.input
+    +inline-block
+  input[type=text]
+    height: 34px
+    font-family: "PT Sans"
+    font-size: 15px
+    padding-left: 10px
+    width: 180px
+    border: 1px solid #96979a
+    border-right: 1px dotted #96979a
+    +box-shadow(0 1px 2px rgba(0,0,0,.14) inset)
+    +border-radius(4px 0 0 4px)
+    +input-placeholder
+      color: #bfbfbf
+      font-style: italic
+  input[type=submit]
+    background: #fff url(/assets/icons/enter.png) no-repeat 9px 8px
+    border: 1px solid #96979a
+    border-left: none
+    margin: 0
+    padding: 0
+    height: 34px
+    vertical-align: top
+    +border-radius(0 4px 4px 0)
+    width: 33px
+    +box-shadow(0 1px 2px rgba(0,0,0,.14) inset)
+    z-index: 0
+    overflow: visible
+
+
+.list-filter-form-block
+  padding: 9px 0 14px 21px
+  background-image: linear-gradient(#f0efe5, #ecebdd)
+  .input
+    margin-right: 15px
+    +inline-block
+    label
+      display: block
+      font-size: 14px
+      margin-bottom: 6px
+
+
+  .f_project_kind,
+  .f_latest_document,
+  .f_creation_period,
+  .f_period
+    width: 142px
+    .selectize-input
+      width: 142px
+
+  .date_range
+    +inline-block
+
+    .date-selector
+      .select2-choice
+        width: 240px
+
+    .date-range-picker
+      display: none
+      .date-range-picker-close
+        +inline-block
+        padding-bottom: 9px
+        cursor: pointer
+        font-weight: bold
+        text-decoration: none
+        color: #000
+
+      .datepicker
+        vertical-align: bottom
+      .input.datepicker
+        width: 110px
+        label
+          white-space: nowrap
+      input.datepicker
+        font-size: 12px
+        width: 110px
+        height: 30px
+        padding-right: 30px
+        background: #fff url(/assets/icons/calendar.png) no-repeat 87px center
+
+.list-filter-total
+  background-image: linear-gradient(#f6f5f0, #f0f0e6)
+  line-height: 30px
+  font-size: 11px
+  padding-left: 15px
+
+.investigations-filter
+  .radio-slider
+    .radio-slider-item
+      margin-right: 13px
+      &:before
+        left: -41px
+        right: -41px
+      &.is-active
+        label
+          color: #d4b102
+        input:checked+label
+          background: #d4b102
+          color: #fff
+      &.is-success
+        label
+          color: #4c8a0c
+        input:checked+label
+          background: #4c8a0c
+          color: #fff
+      &.is-failure
+        label
+          color: #d41100
+        input:checked+label
+          background: #d41100
+          color: #fff
+
+.documents-filter
+  .f_user_id
+    width: 152px
+    .selectize-input
+      width: 152px

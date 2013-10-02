@@ -1,0 +1,72 @@
+article.is-investigation
+  = link_to 'Дела', investigations_path, class: 'link-back'
+
+  h1.investigation-title
+    = @investigation.title
+    - if @timeline_entries.any?
+      span.investigation-date
+        = l @timeline_entries.first.entry_date
+
+  .investigation-description= @investigation.description
+  .investigation-description
+    - if @investigation.published_until?
+      | Дело опубликовано до #{l(@investigation.published_until)}
+    - else
+      | Дело не опубликовано
+
+  .investigation-status
+    | Статус:&nbsp;
+    = t(@investigation.status, scope: "models.investigation.statuses")
+    - if false
+      a.investigation-status-edit@edit href="#"
+
+  .investigation-display-mode
+    label.is-thread
+      = radio_button_tag 'display-mode', 'thread', true, data: { content: 'thread_view'}, role: 'content_togle'
+      span
+        | Цепочкой
+    label.is-table
+      = radio_button_tag 'display-mode', 'table', false, data: { content: 'table_view' }, role: 'content_togle'
+      span
+        | Таблицей
+
+  .investigation-thread-view role="thread_view toggable_content"
+    = render 'thread'
+
+  .investigation-table-view role="table_view toggable_content"
+    = render 'documents/documents_table'
+
+- if user_signed_in?
+  .investigation-side
+    ul.investigation-controls
+      li.investigation-control.is-edit
+        = link_to "Редактировать", edit_investigation_path(@investigation), class: "action"
+
+      li.investigation-control.is-connect
+        = link_to "Добавить документ", new_document_path(investigation_id: @investigation.id), class: "action"
+
+      li.investigation-control.is-connect
+        = link_to "Добавить видео", "javascript:;", class: "action", role: "open-add-model", data: {media_type: "video"}
+      li.investigation-control.is-connect
+        = link_to "Добавить ссылку", "javascript:;", class: "action", role: "open-add-model", data: {media_type: "link"}
+      li.investigation-control.is-connect
+        = link_to "Добавить фото", "javascript:;", class: "action", role: "open-add-model", data: {media_type: "photo"}
+
+      li.investigation-control.is-publish
+        = link_to "Опубликовать", "javascript:;", role: "publish-link", class: "action"
+
+        .side-control-popover
+          = form_tag publish_investigation_path(@investigation), method: :put do
+            p Приложенные файлы будут опубликованы "как есть".
+            = text_field_tag "date", (@investigation.published_until || Date.current).strftime("%d.%m.%Y"), role: "datepicker"
+            = submit_tag "Применить"
+          - if @investigation.publish.active?
+            .popover-linked
+              = link_to "Снять с публикации", [:unpublish, @investigation], method: :put
+
+      - if @investigation.user == current_user || current_user.admin?
+        li.investigation-control.is-delete
+          = link_to 'Удалить дело', investigation_path, method: :delete, data: {confirm: "Вы уверены?"}, class: "action"
+
+- %w(video link photo).each do |media_type|
+  = render "investigations/modals/new_#{media_type}"

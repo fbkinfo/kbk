@@ -1,0 +1,9 @@
+- video = VideoDecorator.new(entry.resource)
+
+.thread-document class="is-video"
+  .thread-document-date
+    = l video.entry_date, format: :thread_full
+  - if user_signed_in?
+    = link_to "Удалить", video, method: :delete, class: "thread-document-remove", data: { confirm: "Вы уверены?" }
+  .thread-document-text
+    = video.embed_code

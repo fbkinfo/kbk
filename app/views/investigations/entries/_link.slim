@@ -1,0 +1,14 @@
+- link = LinkDecorator.new(entry.resource)
+
+.thread-document class="is-link"
+  .thread-document-date
+    = l link.entry_date, format: :thread_full
+  - if user_signed_in?
+    = link_to "Удалить", link, method: :delete, class: "thread-document-remove", data: { confirm: "Вы уверены?" }
+  .thread-document-title
+    a href="#"
+      = link_to link.title, link.url, target: "blank"
+  .thread-document-text
+    = link.comment
+  .thread-document-source
+    = link.source

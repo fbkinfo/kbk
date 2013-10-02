@@ -1,0 +1,104 @@
+
+.list-filter
+
+  = simple_form_for :filter do |f|
+    fieldset.list-filter-slider-block
+      = f.input :document_type,
+              :as => :radio_buttons,
+              :required => false,
+              :label => false,
+              :wrapper_class => 'radio-slider list-filter-slider' do
+        = f.collection_radio_buttons  :document_filter, [['all', 'Все типы'], ['incoming', 'Входящий'], ['outgoing', 'Исходящий']], :first, :last, item_wrapper_tag: nil, :checked => 'all' do |b|
+          - content_tag :span, class: "radio-slider-item is-#{b.value}" do
+            - b.radio_button + b.label
+
+
+      = f.input :document_filter,
+              :as => :check_boxes,
+              :required => false,
+              :label => false,
+              :wrapper_class => 'list-filter-filter-buttons' do |b|
+        = f.collection_check_boxes  :document_filter, [['marked', 'Отмеченные'], ['no_answer', 'Нет ответа']], :first, :last, item_wrapper_tag: nil do |b|
+          - content_tag :span, class: "is-#{b.value}" do
+            - b.check_box + b.label(class: "toggled-button filter-button")
+
+      .list-filter-search-form
+        = f.input :name, as: :string, required: false, label: false, placeholder: 'Поиск документов'
+        = f.submit value: ''
+
+    fieldset.list-filter-form-block
+      = f.input :organization, as: :custom_select, required: false, label: 'Организация'
+      = f.input :case, as: :custom_select, required: false, label: 'Дело'
+      = f.input :author, as: :custom_select, required: false, label: 'Автор'
+
+      = f.input :date_from, as: :datepicker, required: false, label: 'Диапазон дат'
+      = f.input :date_to, as: :datepicker, required: false, label: false
+
+  .list-filter-total
+    | Показано <strong>1809</strong> документов: 744 входящих, 1065 исходящих
+
+table.document-list
+  thead.document-list-header
+    tr
+      th.is-icon
+      th.is-doc
+        a href='#'
+          | Документ
+      th.is-organization.is-sorted-asc
+        a href='#'
+          | Организация
+      th.is-case
+        a href='#'
+          | Дело
+      th.is-author
+        a href='#'
+          | Автор
+      th.is-uploaded.is-sorted-asc
+        a href='#'
+          | Загружен
+      th.is-answered.is-sorted-desc
+        a href='#'
+          | Срок ответа
+
+  tbody
+    - 20.times do
+      tr.is-outcome
+        td.is-icon
+        td.is-doc
+          a.table-document-title href='#'
+            | Запрос информации от Чеченского УФАС
+          .table-document-description
+            | Запрос информации от Чеченского УФАС…
+        td.is-organization
+          | УФАС по Респеблике Ингушетия
+        td.is-case
+          | В МСВД Чечни продолжаются закупки по необоснованно высоким ценам
+        td.is-author
+          | Андрей Мищенков
+        td.is-uploaded
+          | 25 марта
+        td.is-answered
+          | 18 апреля
+
+      tr.is-income
+        td.is-icon
+        td.is-doc
+          a.table-document-title href='#'
+            | Запрос информации от Чеченского УФАС
+          .table-document-description
+            | Запрос информации от Чеченского УФАС…
+        td.is-organization
+          | УФАС по Респеблике Ингушетия
+        td.is-case
+          | В МСВД Чечни продолжаются закупки по необоснованно высоким ценам
+        td.is-author
+          | Андрей Мищенков
+        td.is-uploaded
+          | 25 марта
+        td.is-answered
+          | 18 апреля
+
+- p = Kaminari.paginate_array((0..800).to_a).page(params[:page]).per(10)
+- window = params[:page].to_i == 0 ? 4 : [5 - params[:page].to_i, 1].max
+= paginate p, window: window, outer_window: 1
+

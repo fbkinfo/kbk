@@ -1,0 +1,99 @@
+- if defined?(@filter)
+  .list-filter.documents-filter
+    = simple_form_for @filter.filterer, as: :f, url: documents_path, method: :get do |f|
+      fieldset.list-filter-slider-block@slider
+        = image_tag 'icons/slider.png', role: 'handle', class: 'handle', height: 28, width: 28
+        = f.input :kind,
+                :as => :radio_buttons,
+                :required => false,
+                :label => false,
+                :wrapper_class => 'radio-slider list-filter-slider' do
+          = f.collection_radio_buttons  :kind, [['', 'Все типы'], ['incoming', 'Входящий'], ['outgoing', 'Исходящий']], :first, :last, item_wrapper_tag: nil do |b|
+            - content_tag :span, role: 'entry', class: "radio-slider-item is-#{b.value}" do
+              - b.radio_button + b.label
+
+
+        = f.input :props,
+                :as => :check_boxes,
+                :required => false,
+                :label => false,
+                :wrapper_class => 'list-filter-filter-buttons' do |b|
+          = f.collection_check_boxes  :props, [['marked', 'Отмеченные'], ['no_answer', 'Нет ответа'], ['expired', 'Просроченные']], :first, :last, item_wrapper_tag: nil do |b|
+            - content_tag :span, class: "is-#{b.value}" do
+              - b.check_box + b.label(class: "toggled-button filter-button")
+
+        .list-filter-search-form
+          = f.input :title, as: :string, required: false, label: false, placeholder: 'Поиск документов'
+          = f.submit value: ''
+
+      fieldset.list-filter-form-block
+        = f.input :organization_id, as: :custom_select, required: false, label: 'Организация', collection: @organizations
+        = f.input :investigation_id, as: :custom_select, required: false, label: 'Дело', collection: @investigations
+        = f.input :user_id, as: :custom_select, required: false, label: 'Автор', collection: @authors
+
+        = f.input :creation_period, as: :date_range, label: 'Дата создания', required: false
+        = f.input :period, as: :date_range, label: 'Дата документа', required: false
+        = f.input :with_due_date, as: :boolean, label: "С датой истечения", required: false
+
+    .list-filter-total
+      | Показано документов: <strong>#{@filter.counters.total}</strong> (#{@filter.counters.incoming} входящих, #{@filter.counters.outgoing} исходящих)
+
+table.index-list.document-list
+  thead
+    tr
+      th.is-star
+      th.is-icon
+        .icon-wrapper
+      th.is-doc class=sort_class?('title')
+        a href=sort_by('title')
+          | Документ
+      th.is-organization class=sort_class?('organization')
+        a href=sort_by('organization')
+          | Организация
+      th.is-case class=sort_class?('investigation')
+        a href=sort_by('investigation')
+          | Дело
+      th.is-author class=sort_class?('author')
+        a href=sort_by('author')
+          | Автор
+      th.is-uploaded class=sort_class?('documents.document_date')
+        a href=sort_by('documents.document_date')
+          | Дата на документе
+      th.is-uploaded class=sort_class?('documents.created_at')
+        a href=sort_by('documents.created_at')
+          | Загружен
+      th.is-answered class=sort_class?('due_date')
+        a href=sort_by('due_date')
+          | Срок ответа
+
+  tbody
+    - @documents.each do |document|
+      tr class=("is-#{document.kind}")
+        td.is-star
+          - if defined?(@favourite_ids)
+            = star document, 'documents', @favourite_ids.include?(document.id)
+            a.add-connected-document href=new_document_path(cause_id: document.id)
+        td.is-icon
+        td.is-doc
+          a.table-document-title href=document_path(document)
+            = document.title
+          .table-document-description
+            = truncate document.description, length: 45
+        td.is-organization
+          = document.organization.name
+        td.is-case
+          = document.investigation.title
+        td.is-author
+          = document.user.name
+        td.is-uploaded
+          = l document.document_date.to_date, format: :short
+        td.is-uploaded
+          = l document.created_at.to_date, format: :short
+        td.is-answered class=('responded' if document.responded?) class=('late' if document.overdue?)
+          - if document.due_date
+            = l document.due_date, format: :short
+          - else
+            span.spacer
+              | &mdash;
+
+

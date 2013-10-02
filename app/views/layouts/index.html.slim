@@ -1,0 +1,30 @@
+html
+  head
+    title Фонд Борьбы с Коррупцией
+    link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+
+  body
+    .wrapper
+      header#main-header
+        h1#main-logo
+          = link_to_unless_current "Дела ФБК", :root
+        navigation#main-navigation
+          ul
+            li class=('is-active' if controller_name == 'investigations')
+              = link_to 'Дела', investigations_path
+            li class=('is-active' if controller_name == 'documents')
+              = link_to 'Документы', documents_path
+            li class=('is-active' if controller_name == 'organizations')
+              = link_to 'Организации', organizations_path
+            li class=('is-active' if controller_name == 'users')
+              = link_to 'Сотрудники', users_path
+        = yield :add
+
+      = yield
+
+    footer#main-footer
+      .wrapper
+        = render 'shared/footer_links'

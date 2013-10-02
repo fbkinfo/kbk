@@ -1,0 +1,16 @@
+html
+  head
+    title Фонд Борьбы с Коррупцией
+    link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+
+  body
+    .login-wrapper
+      = yield
+
+    - if current_user
+      footer#main-footer
+        .wrapper
+          = render 'shared/footer_links'

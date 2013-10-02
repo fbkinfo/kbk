@@ -1,0 +1,12 @@
+article.is-form.is-document-form
+
+  = link_to 'Вернуться к списку документов', documents_path, class: 'link-back'
+
+  h1.form-title
+    | Добавление документа
+
+  = render 'form'
+
+.document-form-side
+  = render 'snapshots_aside'
+  = render 'attachements_aside'

@@ -1,0 +1,165 @@
+.datepick
+  background-color: #fff
+  color: #222
+  border-radius: 0.25em
+  -moz-border-radius: 0.25em
+  -webkit-border-radius: 0.25em
+  font-family: Arial,Helvetica,Sans-serif
+  font-size: 90%
+  padding: 15px
+
+.datepick-rtl
+  direction: rtl
+
+.datepick-popup
+  z-index: 9000
+
+.datepick-disable
+  position: absolute
+  z-index: 100
+  background-color: white
+  opacity: 0.5
+  filter: alpha(opacity = 50)
+
+.datepick
+  a
+    color: #222
+    text-decoration: none
+    &.datepick-disabled
+      color: #888
+      cursor: auto
+  button
+    margin: 0.25em
+    padding: 0.125em 0em
+    background-color: #fcc
+    border: none
+    border-radius: 0.25em
+    -moz-border-radius: 0.25em
+    -webkit-border-radius: 0.25em
+    font-weight: bold
+
+  .datepick-nav
+    float: left
+    width: 100%
+    background-color: #fff
+    font-size: 90%
+    font-weight: bold
+    display: none
+
+  .datepick-ctrl
+    float: left
+    width: 100%
+    background-color: #fff
+    font-size: 90%
+    font-weight: bold
+    display: none
+    background-color: #fee6e3
+
+  .datepick-cmd
+    width: 30%
+    &:hover
+      background-color: #e0e0e0
+
+  .datepick-ctrl .datepick-cmd:hover
+    background-color: #f08080
+
+  .datepick-cmd-prevJump, .datepick-cmd-nextJump
+    width: 8%
+
+  a.datepick-cmd
+    height: 1.5em
+
+  button.datepick-cmd
+    text-align: center
+
+  .datepick-cmd-prev, .datepick-cmd-prevJump, .datepick-cmd-clear
+    float: left
+    padding-left: 2%
+
+  .datepick-cmd-current, .datepick-cmd-today
+    float: left
+    width: 35%
+    text-align: center
+
+  .datepick-cmd-next, .datepick-cmd-nextJump, .datepick-cmd-close
+    float: right
+    padding-right: 2%
+    text-align: right
+
+  .datepick-rtl
+    .datepick-cmd-prev, .datepick-cmd-prevJump, .datepick-cmd-clear
+      float: right
+      padding-left: 0%
+      padding-right: 2%
+      text-align: right
+    .datepick-cmd-current, .datepick-cmd-today
+      float: right
+    .datepick-cmd-next, .datepick-cmd-nextJump, .datepick-cmd-close
+      float: left
+      padding-left: 2%
+      padding-right: 0%
+      text-align: left
+
+  .datepick-month-nav
+    float: left
+    text-align: center
+    div
+      float: left
+      width: 12.5%
+      margin: 1%
+      padding: 1%
+    span
+      color: #888
+
+  .datepick-month-row
+    clear: left
+
+  .datepick-month
+    float: left
+    width: 15em
+    text-align: center
+
+  .datepick-month-header
+    padding-bottom: 10px
+    input
+      position: absolute
+      display: none
+
+  .datepick-month
+    table
+      width: 100%
+      border-collapse: collapse
+    th, td
+      margin: 0em
+      padding: 0em
+      font-weight: normal
+      text-align: center
+
+    th
+      span
+        padding: 5px
+        display: block
+        border-bottom: 1px dashed #aaa
+        margin-bottom: 5px
+    td
+      a
+        display: block
+        padding: 5px
+      &:hover
+        background-color: #EEE
+
+  td a.datepick-selected
+    background-color: #FF6161
+    color: white
+
+  th span
+    color: #CCC
+    &.datepick-dow-6, &.datepick-dow-0
+      color: #FFA3A3
+
+  .datepick-status
+    clear: both
+    text-align: center
+
+  .datepick-clear-fix
+    clear: both

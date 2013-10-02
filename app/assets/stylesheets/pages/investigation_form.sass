@@ -1,0 +1,141 @@
+article.is-form.is-investigation-form
+
+  .form-title
+    +with-icon('pencil_big', -38px, 7px)
+
+  .investigation-form-cancel
+    +inline-block
+    vertical-align: bottom
+    margin-bottom: 12px
+    margin-left: 22px
+    font-size: 12px
+    a
+      color: #646463
+
+  .investigation-form-delete
+    margin-top: 12px
+    float: right
+    margin-right: 17px
+    padding-left: 25px
+    font-size: 12px
+    a
+      color: #646463
+      text-decoration: none
+      +with-icon("trash", -19px, -1px)
+      border-bottom: 1px dotted #646464
+
+
+  .investigation-properties
+    background-image: linear-gradient(#f6f5f0, #ecebdd)
+    height: 77px
+    padding-left: 12px
+    font-size: 15px
+
+    .investigation_status
+      margin: 0 0 0 12px
+      +inline-block
+      height: 55px
+      padding-top: 23px
+      .radio
+        margin-right: 5px
+        &:last-child
+          margin-right: 0
+
+      label
+        +inline-block
+        vertical-align: middle
+        line-height: 34px
+        padding: 0 10px
+        position: relative
+        border-radius: 4px
+        font-size: 15px
+        cursor: pointer
+        margin: 0
+        // margin-left: -18px
+        &:before
+          content: ''
+          position: absolute
+          bottom: 8px
+          left: 10px
+          right: 10px
+          border-bottom: 1px dotted
+        &[for=investigation_status_active]
+          color: #d4b102
+
+        &[for=investigation_status_success]
+          color: #4c8a0c
+
+        &[for=investigation_status_failure]
+          color: #d41100
+
+
+      input[type="radio"]
+        display: none
+      input[type="radio"]:checked + label
+        +box-shadow(0 1px 6px rgba(0,0,0,.3) inset)
+        background: #666666
+        color: #fff
+        padding: 0 10px
+        position: relative
+        border-radius: 4px
+        // margin-left: -18px
+        text-decoration: none
+        &:before
+          content: none
+
+
+        &[for=investigation_status_active]
+          background-color: #d4b102
+
+        &[for=investigation_status_success]
+          background-color: #4c8a0c
+
+        &[for=investigation_status_failure]
+          background-color: #d41100
+
+
+    .investigation_investigation_date, .investigation_due_date
+      +inline-block
+      vertical-align: top
+      margin-left: 20px
+      label
+        margin-top: 0
+      input
+        width: 134px
+        padding-right: 30px
+        background: #fff url(/assets/icons/calendar.png) no-repeat 107px center
+    .investigation_due_date
+      margin-left: 25px
+
+  .related-investigation
+    background-image: linear-gradient(#f6f5f0, #edebde)
+    padding: 10px 20px 20px
+
+  .investigation_name
+    input
+      width: 482px
+
+.investigation-form-side
+  +inline-block
+  vertical-align: top
+  width: 270px
+  margin-top: 145px
+
+
+.investigation-attachments
+  .investigation-attachments-title
+    font-size: 15px
+  ul.investigation-attachments-list
+    margin-top: 11px
+    margin-right: -12px
+    li
+      +inline-block
+      margin-right: 12px
+      margin-bottom: 12px
+
+  .add-investigation-attachments
+    padding-left: 15px
+    margin-bottom: 5px 0 0 -15px
+    color: #333
+    +inline-block
+    +with-icon("clip", 0, 1px)

@@ -1,0 +1,26 @@
+.document-aside-error(role="aside-validation-error")
+  | Необходимо загрузить хотя бы один скан или вложение.
+
+- if @document_form.new_record?
+  - scope = @document_form.snapshots.sort_by{|x| x.number}
+- else
+  - scope = @document_form.snapshots.sorted
+
+.document-attachments
+  .document-attachments-title
+    | Содержимое документа
+  .hint
+    | Загрузите файл PDF со всеми страницами,
+    | или загружайте по одной странице изображениями в формате JPEG или PNG.
+
+  ul.document-snapshots-list(role="snapshots-list")
+    - scope.each do |s|
+      = render 'snapshot', snapshot: s
+
+  .document-snapshots-progress
+    | Загрузка&nbsp;
+    i 100%
+
+  .actions
+    a.add-document-snapshot#attach href='#'
+      | Добавить…

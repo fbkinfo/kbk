@@ -1,0 +1,5 @@
+= render "investigations/entries/#{entry.resource_type.underscore}", entry: entry, prev_entry: prev_entry, next_entry: next_entry
+
+- if @investigation.publish.active? && @investigation.published_until < entry.entry_date && (next_entry.blank? || @investigation.published_until >= next_entry.entry_date )
+  .thread-document-published-separator
+    | Опубликовано до этого момента

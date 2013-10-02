@@ -1,0 +1,12 @@
+- photo = entry.resource
+
+.thread-document class="is-photo"
+  .thread-document-date
+    = l photo.entry_date, format: :thread_full
+  - if user_signed_in?
+    = link_to "Удалить", photo, method: :delete, class: "thread-document-remove", data: { confirm: "Вы уверены?" }
+  .thread-document-text
+    = image_tag photo.image.url(:thread)
+  - if photo.comment?
+    .thread-document-photo-comment
+      span= photo.comment

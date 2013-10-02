@@ -1,0 +1,12 @@
+li.document-attachment(
+  id="snapshot_#{snapshot.id}"
+  data-id=snapshot.id
+  data-public-image=snapshot.public_scan.url(:preview)
+  data-original-image=snapshot.original_scan.url(:preview)
+  role="list-item"
+)
+  = image_tag snapshot.original_scan.url(:thumb)
+  .document-snapshot-controls
+    = link_to '', snapshot.original_scan.url(:preview), rel: "documents", class: 'document-snapshot-preview'
+    = link_to '', 'javascript:;', method: :delete, class: 'document-snapshot-editor', role: 'snapshot-editor-button'
+    = link_to '', snapshot_path(snapshot), remote: true, method: :delete, class: 'document-snapshot-remove', role: 'remove-link'

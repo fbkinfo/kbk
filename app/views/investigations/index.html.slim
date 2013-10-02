@@ -1,0 +1,98 @@
+- content_for :add do
+  .big-green-button.add-new-object.is-new-investigation
+    = link_to 'Добавить дело', new_investigation_path
+
+- if user_signed_in?
+  .list-filter.investigations-filter
+    = simple_form_for @filter.filterer, url: investigations_path, as: :f, method: :get do |f|
+      fieldset.list-filter-slider-block@slider
+        = image_tag 'icons/slider.png', role: 'handle', class: 'handle', height: 28, width: 28
+        = f.input :status,
+                :as => :radio_buttons,
+                :required => false,
+                :label => false,
+                :wrapper_class => 'radio-slider list-filter-slider' do
+
+          = f.collection_radio_buttons :status, [['', 'Все дела'], ['active', 'В процессе'], ['success', 'Решено'], ['failure', 'Отказ']], :first, :last, item_wrapper_tag: nil do |b|
+            - content_tag :span, role: 'entry', class: "radio-slider-item is-#{b.value}" do
+              - b.radio_button + b.label
+
+        = f.input :props,
+                :as => :check_boxes,
+                :required => false,
+                :label => false,
+                :wrapper_class => 'list-filter-filter-buttons' do |b|
+          = f.collection_check_boxes  :props, [['marked', 'Отмеченные'], ['no_answer', 'Нет ответа'], ['published', 'Опубликованные']], :first, :last, item_wrapper_tag: nil do |b|
+            - content_tag :span, class: "is-#{b.value}" do
+              - b.check_box + b.label(class: "toggled-button filter-button")
+
+        .list-filter-search-form
+          = f.input :title, as: :string, required: false, label: false, placeholder: 'Поиск дел', input_html: {role: 'submitter'}
+          = f.submit value: ''
+
+      fieldset.list-filter-form-block
+        = f.input :organization_id, as: :custom_select, required: false, label: 'Организация в деле', collection: @organizations
+        = f.input :user_id, as: :custom_select, required: false, label: 'Автор', collection: @users
+        = f.input :latest_document, as: :date_range, label: 'Последний документ', required: false
+        = f.input :creation_period, as: :date_range, label: 'Дело создано', required: false
+        = f.input :project_kind, as: :custom_select, label: 'Проект', required: false, collection: Investigation.project_kind.options
+
+- if @filter
+  .list-filter-total
+    | Показано дел: #{@filter.counters.size}
+
+
+table.index-list.cases-list
+  thead
+    tr
+      th.is-star
+      th.is-color
+        .icon-wrapper
+      th.is-title class=sort_class?('investigations.title')
+        a href=sort_by('investigations.title')
+          | Дело
+      th.is-organizations
+        | Организации в деле
+      th.is-latest-document class=sort_class?('latest_document')
+        a href=sort_by('latest_document')
+          | Последний документ
+      th.is-created class=sort_class?('investigations.created_at')
+        a href=sort_by('investigations.created_at')
+          | Создано
+      th.is-closed class=sort_class?('closed_at')
+        a href=sort_by('closed_at')
+          | Закрыто
+
+  tbody
+    - @investigations.each do |e|
+      tr class="is-#{e.status}"
+        td.is-star
+          - if @favourite_ids
+            = star e, 'investigations', @favourite_ids.include?(e.id)
+        td.is-color
+        td.is-title
+          a.table-case-title href=investigation_path(e)
+            = e.title
+          .table-case-info
+            | #{e.documents.size} #{Russian.p(e.documents.size, 'документ', 'документа', 'документов')}: #{e.documents.incoming.size} #{Russian.p(e.documents.incoming.size, 'входящий', 'входящих', 'входящих')}, #{e.documents.outgoing.size} #{Russian.p(e.documents.outgoing.size, 'исходящий', 'исходящих', 'исходящих')}
+        td.is-organizations
+          - e.organizations.each do |o|
+            .table-document-organization= o.name
+        td.is-latest-document
+          - if e.latest_document && (user_signed_in? || e.latest_document.published?)
+            = l e.latest_document.document_date, format: :short
+            .table-document-description
+              = e.latest_document.title
+          - else
+            span.spacer
+              | &mdash;
+        td.is-created
+          = l e.created_at.to_date, format: :short
+        td.is-closed
+          - if e.closed_at
+            = l e.closed_at, format: :short
+          - else
+            span.spacer
+              | &mdash;
+
+= paginate @investigations

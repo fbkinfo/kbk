@@ -1,0 +1,18 @@
+language: ruby
+bundler_args: --without development
+
+git:
+  submodules: false
+
+rvm:
+  - 2.0.0
+
+before_script:
+  - sudo apt-get -y update && sudo apt-get -y install imagemagick ghostscript
+  - cp config/database.yml.sample config/database.yml
+  - psql -c 'create database kbk_test;' -U postgres
+  - bundle exec rake db:schema:load
+  - identify --version
+
+script:
+  - 'bundle exec rspec --format nested'

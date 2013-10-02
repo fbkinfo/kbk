@@ -1,0 +1,72 @@
+.wrapper
+  width: 952px
+  margin: auto
+
+h1#main-logo
+  +inline-block
+  +text-shadow(1px 1px 0 #fff)
+  cursor: default
+  line-height: 44px
+  &, & a
+    color: #999999
+    font-size: 16px
+    text-decoration: none
+  & a:hover
+    text-decoration: underline
+
+
+header#main-header
+  padding-top: 30px
+  border-bottom: 1px solid #DEDDD8
+  navigation#main-navigation
+    +inline-block
+    font-size: 16px
+    margin-left: 34px
+    margin-bottom: -1px
+
+    a
+      color: inherit
+      text-decoration: none
+      &:hover
+        text-decoration: underline
+
+    ul
+      +inline-block
+      li
+        +inline-block
+        +text-shadow(1px 1px 0 #fff)
+        padding: 0 30px
+        line-height: 43px
+        border-left: 1px solid #DEDDD8
+        border-top: 1px solid #DEDDD8
+        border-bottom: 1px solid #DEDDD8
+        background-image: linear-gradient(#F9F8F5 0%, #fff 50%, #fff 100%)
+        &.is-active
+          background-image: none
+          background-color: #F6F5F0
+          border-bottom: none
+          padding-bottom: 1px
+        &:last-child
+          border-right: 1px solid #DEDDD8
+
+  .add-new-object
+    padding-left: 47px
+    padding-right: 15px
+    float: right
+    &.is-new-document
+      +with-icon('doc_new', 19px, 9px)
+    &.is-new-investigation
+      +with-icon('new_case', 19px, 9px)
+    &.is-new-organization
+      +with-icon('new_organization', 19px, 9px)
+    &.is-new-user
+      +with-icon('new_user', 19px, 9px)
+
+footer#main-footer
+  margin-top: 50px
+  height: 50px
+  line-height: 50px
+  background: url(/assets/footer_bg.png) repeat-x 0 0
+  text-align: right
+  a
+    color: #666

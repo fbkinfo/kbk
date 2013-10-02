@@ -1,0 +1,26 @@
+= simple_form_for @investigation do |f|
+    fieldset.investigation-properties
+      | Статус дела:
+      = f.input :status,
+              :collection => [['active', 'В процессе'], ['success', 'Решено'], ['failure', 'Окончательный отказ']],
+              :label_method => :last,
+              :value_method => :first,
+              :as => :radio_buttons,
+              :checked => @investigation.status,
+              :required => false,
+              :label => false
+
+    = f.input :title, as: :string, input_html: { size: 50 }
+    = f.input :description, as: :text
+    = f.input :project_kind, include_blank: false
+
+    .actions
+      = f.submit class: 'big-green-button is-compact', value: 'Сохранить изменения'
+
+      - if @investigation.persisted?
+        .investigation-form-cancel
+          a href=investigation_path(@investigation)
+            | Отмена
+      .investigation-form-delete
+        a href='#'
+          | Как удалить это дело?

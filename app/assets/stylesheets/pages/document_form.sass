@@ -1,0 +1,252 @@
+article.is-form
+  +inline-block
+  padding-top: 75px
+  width: 660px
+  padding-right: 20px
+
+  h2
+    margin-top: 7px
+    font-style: italic
+    color: #555
+
+  .link-back
+    font-size: 15px
+    font-weight: bold
+    color: #333
+    +with-icon("arrow_left", -13px, 6)
+
+  .form-title
+    font-family: $headers-font
+    font-weight: bold
+    font-size: 38px
+    margin-top: 14px
+    line-height: 42px
+    color: #333
+
+  label
+    margin-bottom: 8px
+    margin-top: 25px
+
+article.is-form.is-document-form
+
+  .form-title
+    +with-icon('pencil_big', -38px, 7px)
+
+  .document-properties
+    background-image: linear-gradient(#f6f5f0, #ecebdd)
+    height: 110px
+    margin-top: 22px
+    width: 640px
+
+    .properties-checkboxes
+      display: block
+      margin-top: 6px
+
+    .document_kind
+      margin: 0 0 0 29px
+      +inline-block
+      width: 234px
+      border-right: 2px solid #fff
+      height: 55px
+      padding-top: 23px
+      .radio
+        margin-right: 23px
+        &:last-child
+          margin-right: 0
+
+      label
+        +inline-block
+        cursor: pointer
+        vertical-align: middle
+        line-height: 34px
+        padding: 0 10px
+        position: relative
+        border-radius: 4px
+        font-size: 15px
+        margin: 0
+        // margin-left: -18px
+        &:before
+          content: ''
+          position: absolute
+          bottom: 8px
+          left: 10px
+          right: 10px
+          border-bottom: 1px dotted
+        &[for=document_kind_incoming]
+          color: $in-color
+          +with-icon('doc_in_red', -8px, 8px)
+
+        &[for=document_kind_outgoing]
+          color: $out-color
+          +with-icon('doc_out_blue', -8px, 8px)
+
+      input[type="radio"]
+        display: none
+      input[type="radio"]:checked + label
+        +box-shadow(0 1px 6px rgba(0,0,0,.3) inset)
+        background: #666666
+        color: #fff
+        padding: 0 10px
+        position: relative
+        border-radius: 4px
+        padding-left: 28px
+        margin-left: -18px
+        text-decoration: none
+        &:before
+          content: none
+
+
+        &[for=document_kind_incoming]
+          background-color: $in-color
+          +with-icon('doc_in_white', 10px, 8px)
+
+        &[for=document_kind_outgoing]
+          background-color: $out-color
+          +with-icon('doc_out_white', 10px, 8px)
+
+    .document_document_date, .document_due_date
+      +inline-block
+      vertical-align: top
+      margin-left: 20px
+      label
+        margin-top: 0
+      input
+        width: 134px
+        padding-right: 30px
+        background: #fff url(/assets/icons/calendar.png) no-repeat 107px center
+    .document_due_date
+      margin-left: 25px
+      clear: both
+
+    .document_final,
+    .document_renew_investigation_publish
+      display: inline-block
+      margin-left: 22px
+      label
+        cursor: pointer
+        margin-top: 0
+        display: inline-block
+
+    .document_renew_investigation_publish
+      margin-left: 114px
+
+  .related-document
+    margin-top: 30px
+    width: auto
+    background-image: linear-gradient(#f6f5f0, #edebde)
+    padding: 10px 20px 20px
+
+  .related-warning
+    margin-top: 30px
+    width: auto
+    background: red
+    color: white
+    padding: 10px
+
+  .document_name
+    input
+      width: 482px
+  .selectize-input
+    width: 482px
+
+.document-form-side
+  +inline-block
+  vertical-align: top
+  width: 270px
+  margin-top: 145px
+
+
+.document-aside-error
+  font-weight: bold
+  color: #BD0000
+  margin-top: 6px
+  display: none
+
+.document-attachments
+
+  .document-attachments-title,
+    font-size: 15px
+
+  .hint
+    display: block
+    margin-top: 5px
+    font-style: italic
+    color: gray
+  .document-attachments-note
+    margin-top: 10px
+    color: #555
+
+  .document-snapshots-progress, .document-attachements-progress
+    display: none
+    margin-bottom: 11px
+    font-style: italic
+
+    i
+      font-weight: bold
+
+  ul.document-attachements-list
+    margin: 4px 0
+
+  ul.document-attachments-uploads
+    margin-bottom: 11px
+    line-height: 1.5em
+    display: none
+
+  ul.document-snapshots-list
+    margin-top: 11px
+    margin-right: -12px
+    li
+      +inline-block
+      border: 1px solid #CCC
+      margin-right: 12px
+      margin-bottom: 12px
+      position: relative
+      cursor: move
+      // &.attachment-placeholder
+      //   border: 1px dashed #333
+      //   margin: -1px
+      &.ui-sortable-helper
+        .document-snapshot-controls
+          display: none
+      &:hover
+        .document-snapshot-controls
+          // display: block
+          opacity: 1
+      .document-snapshot-controls
+        // display: none
+        opacity: 0
+        +transition(opacity .1s)
+        background-color: rgba(0, 0, 0, 0.5)
+        text-align: center
+        position: absolute
+        width: 100%
+        padding: 7px 0
+        bottom: 0
+        left: 0
+        .document-snapshot-preview
+          +inline-block
+          +sized-sprite($icons, 'eye')
+        .document-snapshot-remove
+          +inline-block
+          +sized-sprite($icons, 'trash_white')
+          margin-left: 10px
+        .document-snapshot-editor
+          +inline-block
+          +sized-sprite($icons, 'table_white')
+          margin-left: 10px
+
+  .actions
+    margin-bottom: 10px
+
+  .add-document-snapshot, .add-document-attachement
+    padding-left: 15px
+    margin-bottom: 5px 0 0 -15px
+    color: #333
+    +inline-block
+    +with-icon("clip", 0, 1px)
+
+.document-custom-attachments
+  margin-top: 15px
+  h3
+    font-size: 14px
+    margin: 4px

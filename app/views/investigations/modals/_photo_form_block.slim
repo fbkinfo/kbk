@@ -1,0 +1,9 @@
+li(role="photo-item")
+  .photo
+    = image_tag @photo.image.url(:uploader)
+    = link_to "Удалить", @photo, method: :delete, remote: true, role: "delete-photo-upload"
+  .comment
+    = hidden_field_tag "photo[][investigation_id]", @investigation_id
+    = hidden_field_tag "photo[][id]", @photo.id
+    = hidden_field_tag "photo[][entry_date]", @photo.entry_date
+    = text_area_tag "photo[][comment]", ""

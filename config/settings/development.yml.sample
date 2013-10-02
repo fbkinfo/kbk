@@ -1,0 +1,11 @@
+secret_key_base: '9da666128e6d9bf894d180d9c4724019370bab3d770b202965ded8af43d3ffc229c14f03'
+honeybadger_key: 'foobar'
+
+s3:
+  bucket: ''
+  access_key_id: ''
+  secret_access_key: ''
+
+devise:
+  secret_key: '1c758f48d9edc0c934fb1f06fb5880dd2518360da3a25da6b0d4f1efeae60d38b02a3'
+  pepper: 'b00aaa58ec292e381c3549057990c4fc85bd3788dea2d033dd1cee730d05d30544edaf84'

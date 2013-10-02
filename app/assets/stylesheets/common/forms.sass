@@ -1,0 +1,62 @@
+.custom_select
+  width: 210px
+
+.is-form
+  input[type=text], input[type=email], input[type=password]
+    height: 34px
+    font-size: 15px
+    padding: 0 14px
+    border: 1px solid #96979a
+    font-family: $default-font
+    margin-left: 0
+    +box-shadow(0 1px 2px rgba(0,0,0,.14) inset)
+    +border-radius(4px)
+    +input-placeholder
+      color: #bfbfbf
+      font-style: italic
+  input.long
+    width: 100%
+
+  label
+    font-size: 15px
+    display: block
+
+  textarea
+    width: 640px
+    height: 170px
+    +border-radius(4px)
+    font-size: 15px
+    font-family: $default-font
+    border: 1px solid #96979a
+    +box-shadow(0 1px 2px rgba(0,0,0,.14) inset)
+    padding: 14px 17px
+    resize: vertical
+
+  form
+    .hint
+      display: block
+      margin-left: 5px
+      margin-top: 5px
+      font-style: italic
+      color: gray
+    .error
+      display: block
+      font-weight: bold
+      color: #BD0000
+      margin-left: 5px
+      margin-top: 5px
+    .errors
+      +border-radius(4px)
+      background-image: linear-gradient(#ecebdd, #f6f5f0)
+      padding: 15px
+      margin-top: 10px
+      width: 610px
+      ul
+        margin-top: 5px
+        padding-left: 20px
+        list-style-type: disc
+        li
+          font-weight: bold
+        color: #BD0000
+    .actions
+      margin-top: 28px

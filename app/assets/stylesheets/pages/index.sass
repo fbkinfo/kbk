@@ -1,0 +1,213 @@
+// Common index styles
+
+.index-list
+  margin-top: 10px
+  border-collapse: separate
+  border-spacing: 0 10px
+  width: 1013px
+  th
+    color: #666666
+    a
+      font-size: 13px
+      color: #666666
+  th
+    padding: 5px 5px 5px 16px
+    &.is-sorted
+      &.asc
+        a
+          +with-icon('arrow_up', 100%, 5px)
+            margin-left: 5px
+      &.desc
+        a
+          +with-icon('arrow_down', 100%, 5px)
+            margin-left: 5px
+
+  th, td
+    vertical-align: top
+  tr
+    .toggle-star-icon
+      display: none
+    &:hover
+      .toggle-star-icon
+        display: inline-block
+
+    td
+      color: #333
+      line-height: 16px
+      padding: 10px 5px 0px 16px
+      a
+        color: #666666
+
+// Documents index styles
+
+.document-list
+  margin-left: -61px
+  th
+    &.is-icon
+      .icon-wrapper
+        +with-icon('doc', 10px, 4px)
+
+  tr:hover
+    td.is-star
+      .add-connected-document
+        +inline-block
+
+  th, td
+    &.is-icon
+      padding: 0px
+      width: 34px
+    &.is-star
+      padding: 10px 0 0
+      width: 28px
+      .add-connected-document
+        display: none
+        margin: 17px 0 0 3px
+        +sized-sprite($icons, 'doc_new_gray')
+        &:hover
+          +sized-sprite($icons, 'doc_new_dark')
+    &.is-doc
+      width: 247px
+    &.is-organization
+      width: 148px
+    &.is-case
+      width: 149px
+    &.is-author
+      width: 126px
+    &.is-uploaded
+      width: 79px
+    &.is-answered
+      &.responded
+        font-style: italic
+        color: #4a892e
+      &.late
+        color: #ce071a
+  tr
+    &.is-outgoing
+      .is-icon
+        background: #79a0de url(/assets/icons/doc_out_white.png) no-repeat 10px 10px
+      .is-doc
+        background-color: #ecefee
+    &.is-incoming
+      .is-icon
+        background: #d15544 url(/assets/icons/doc_in_white.png) no-repeat 10px 10px
+      .is-doc
+        background-color: #f2e9e3
+
+    td
+      &.is-doc
+        padding-bottom: 9px
+        .table-document-title
+          color: #000
+          line-height: 16px
+        .table-document-description
+          color: #999999
+          font-size: 11px
+          font-style: italic
+          margin-top: 10px
+
+// Cases index styles
+
+
+.cases-list
+  margin-left: -61px
+  th
+    &.is-color
+      .icon-wrapper
+        +with-icon('flag', 23px, 4px)
+
+  th, td
+    width: 50px
+    &.is-color
+      padding: 0px
+      width: 34px
+    &.is-star
+      padding: 10px 0 0
+      width: 26px
+    &.is-title
+      width: 239px
+    &.is-organizations
+      width: 271px
+    &.is-latest-document
+      width: 152px
+    &.is-created
+      width: 101px
+    &.is-closed
+      width: 101px
+  tr
+    &.is-success
+      .is-color
+        +background-image(linear-gradient(left, #f6f5f0, #cfddb7))
+    &.is-active
+      .is-color
+        +background-image(linear-gradient(left, #f6f5f0, #eeeac5))
+    &.is-failure
+      .is-color
+        +background-image(linear-gradient(left, #f6f5f0, #e7bfb7))
+
+    td
+      &.is-title
+        padding-bottom: 9px
+        .table-case-title
+          color: #000
+          line-height: 16px
+        .table-case-info
+          color: #999999
+          font-size: 11px
+          font-style: italic
+          margin-top: 10px
+
+//
+
+.organizations-list
+  border-collapse: collapse
+  margin-top: 21px
+  thead
+    th
+      padding-bottom: 18px
+      border-bottom: 1px dashed #c5c5c6
+      a
+        color: #000
+  tbody
+    td
+      border-bottom: 1px dashed #c5c5c6
+      padding-bottom: 20px
+      padding-top: 20px
+      &.is-name
+        width: 599px
+      &.is-documents-count
+        width: 95px
+      &.is-investigations-count
+        width: 59px
+      &.is-created
+        width: auto
+
+
+.users-list
+  border-collapse: collapse
+  margin-top: 21px
+  thead
+    th
+      padding-bottom: 18px
+      border-bottom: 1px dashed #c5c5c6
+      a
+        color: #000
+  tbody
+    td
+      border-bottom: 1px dashed #c5c5c6
+      padding-bottom: 20px
+      padding-top: 20px
+      &.is-name
+        width: 250px
+      &.is-email
+        width: 300px
+      &.is-documents-count
+        width: 95px
+      &.is-activity
+        width: auto
+
+    tr.is-locked
+      td.is-name
+        span
+          text-decoration: line-through
+        small
+          font-size: 0.6em

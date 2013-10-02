@@ -1,0 +1,6 @@
+- content_for :add do
+  .big-green-button.add-new-object.is-new-document
+    = link_to 'Добавить документ', new_document_path
+
+= render 'documents/documents_table'
+= paginate @documents

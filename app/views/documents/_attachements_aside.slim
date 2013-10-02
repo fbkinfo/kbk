@@ -1,0 +1,20 @@
+- if @document_form.new_record?
+  - scope = @document_form.snapshots.sort_by{|x| x.number}
+- else
+  - scope = @document_form.snapshots.sorted
+
+.document-attachments
+  .document-attachments-title
+    | Вложения
+
+  ul.document-attachements-list(role="attachements-list")
+    - @document_form.attachements.each do |s|
+      = render 'attachement', attachement: s
+
+  .document-attachements-progress
+    | Загрузка&nbsp;
+    i 100%
+
+  .actions
+    a.add-document-attachement#upload_attachement href='#'
+      | Добавить…

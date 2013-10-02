@@ -1,0 +1,59 @@
+= simple_form_for @document_form, as: :document, html: {'data-document' => @document_form.id, 'data-investigation-published' => @document_form.investigation.try(:published_until?)} do |f|
+  - if f.object.errors[:base].any?
+    .errors
+      | При сохранении возникли ошибки:
+      ul
+        - f.object.errors[:base].each do |e|
+          li= e
+
+  fieldset.document-properties
+    = f.input :kind,
+            :collection => [['incoming', 'Входящий'], ['outgoing', 'Исходящий']],
+            :label_method => :last,
+            :value_method => :first,
+            :as => :radio_buttons,
+            :checked => (f.object.kind or 'incoming'),
+            :required => false,
+            :label => false
+
+    = f.input :document_date, as: :datepicker
+    = f.input :due_date, as: :datepicker
+
+    .properties-checkboxes
+      = f.input :final, input_html: { role: "document-is-final" }
+      = f.input :renew_investigation_publish, as: :boolean, wrapper_html: { role: "document-renew-investigation-publish" }
+
+  = f.input :title, as: :string, input_html: { size: 50 }
+  = f.input :description, as: :text
+
+  = f.input :organization_id, as: :select, collection: @document_form.organizations_list, required: false, hint: "выберите из списка, либо введите новое наименование и нажмите Enter"
+  = f.error :organization
+
+  = f.input :investigation_id, as: :select, collection: @document_form.investigations_list, required: false, hint: "выберите из списка, либо введите новое наименование и нажмите Enter"
+  = f.error :investigation
+
+  = f.input :author_id, as: :select, collection: @document_form.authors_list, required: false, hint: "выберите из списка, либо введите новое наименование и нажмите Enter"
+  = f.error :author
+
+  - if f.object.new_record?
+    .document-snapshot-ids
+      - f.object.snapshots.each do |s|
+        = f.hidden_field :snapshot_ids, multiple: true, value: s.id
+
+    .document-attachement-ids
+      - f.object.attachements.each do |s|
+        = f.hidden_field :attachement_ids, multiple: true, value: s.id
+
+  fieldset.related-document
+    = f.input :cause_id, hint: "список документов, доступных для выбора, зависит от выбранного дела" do
+      = f.select :cause_id, f.object.possible_causes.map {|x| [x.title, x.id.to_s, {'data-kind' => x.kind, 'data-date' => x.document_date}] }, {include_blank: true}, {role: 'related-doc-select'}
+
+  - if f.object.cause_id.blank? && f.object.new_record?
+    .related-warning(role="related-doc-warning")
+      | Вы уверены, что хотите загрузить документ без ответа?
+
+  .actions
+    = f.submit 'Сохранить изменения', class: 'big-green-button is-compact'
+
+#attachement_upload_box
+#snapshot_upload_box

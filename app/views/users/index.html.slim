@@ -1,0 +1,54 @@
+- if current_user.admin?
+  - content_for :add do
+    .big-green-button.add-new-object.is-new-user
+      = link_to 'Создать пользователя', new_user_path
+
+table.index-list.users-list
+  thead.index-list-header
+    tr
+      th.is-name class=sort_class?('name')
+        a href=sort_by('name')
+          | Имя
+      th.is-email class=sort_class?('email')
+        a href=sort_by('email')
+          | Почта
+      th.is-documents-count class=sort_class?('documents_count')
+        a href=sort_by('documents_count')
+          | Документов
+      th.is-role class=sort_class?('role')
+        a href=sort_by('role')
+          | Роль
+      th.is-activity class=sort_class?('last_sign_in_at')
+        a href=sort_by('last_sign_in_at')
+          | Последняя активность
+
+  tbody
+    - @users.each do |user|
+      tr class=('is-locked' if user.access_locked?)
+        td.is-name
+          - if current_user.admin?
+            a.table-document-name href=edit_user_path(user)
+              span
+                = user.name
+          - else
+            = user.name
+          - if user.access_locked?
+            | &nbsp;
+            small
+              | (
+              = link_to "разблокировать", unlock_user_path(user)
+              | )
+        td.is-email
+          = user.email
+        td.is-documents-count
+          = user.documents_count
+        td.is-role
+          = user.role.text
+        td.is-activity
+          - if user.last_sign_in_at
+            = l user.last_sign_in_at.to_date, format: :short
+          - else
+            span.spacer
+              | &mdash;
+
+= paginate @users

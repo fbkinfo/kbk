@@ -1,0 +1,16 @@
+article.is-form
+
+  h1.form-title.is-document-edit
+    | Дела ФБК
+
+  h2 Войдите для участия в финальной борьбе между добром и нейтралитетом
+
+  .box
+    = simple_form_for(resource, as: resource_name, url: password_path(resource_name), :html => { :method => :put }) do |f|
+      = f.input :reset_password_token, as: :hidden
+      = f.input :password, :label => "Новый пароль", :required => true, :autofocus => true, input_html: { role: 'password-input' }
+      = f.input :password_confirmation, :label => "И еще раз", :required => true
+
+      .actions
+        = f.submit 'Сменить пароль', class: 'big-green-button'
+        = link_to 'Вход с паролем', new_session_path(resource_name), class: "recover-link"

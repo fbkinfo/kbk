@@ -1,0 +1,52 @@
+@import 'compass'
+@import 'compass/reset'
+
+$default-font: arial, sans-serif
+$default-font-color: #333
+$headers-font: helvetica, arial, sans-serif
+
+$icons: sprite-map("icons/*.png", $spacing: 2px)
+
+$in-color: #d41100
+$out-color: #4d59a0
+// #79a0de
+
+@mixin image-size($path)
+  width: image-width($path)
+  height: image-height($path)
+
+@mixin sized-sprite($map, $sprite)
+  background: sprite($map, $sprite) no-repeat
+  +image-size(sprite-file($map, $sprite))
+
+@mixin with-icon($name, $left, $top)
+  position: relative
+  &:after
+    content: ''
+    position: absolute
+    left: $left
+    top: $top
+    +sized-sprite($icons, $name)
+    @content
+
+@mixin input-placeholder
+  &::-webkit-input-placeholder
+    @content
+  &:-moz-placeholder
+    @content
+  &:-ms-input-placeholder
+    @content
+
+strong
+  font-weight: bold
+
+h1,h2,h3,h4,h5,h6
+  font-family: $headers-font
+  color: #333333
+
+body
+  background-color: #F6F5F0
+  font:
+    family: $default-font
+    size: 13px
+    color: $default-font-color

@@ -1,0 +1,19 @@
+.modal-form(role="new-photo-modal" data-investigation-id=@investigation.id)
+
+  h1
+    | Добавление фото от
+    = text_field_tag "entry_date", Date.current.strftime("%d.%m.%Y"), role: "datepicker entry-date", required: true
+
+  .add-photo
+    a#upload_photo(href="#") Выбрать...
+
+  .photo-upload-status(role="progress-pane")
+      = "Загружается "
+      strong file.png
+
+  = form_tag finalize_photos_path, method: :post do
+    ul.photos-list(role="photos-list")
+
+    .actions
+      = submit_tag "Опубликовать", class: "submit", role: "submit"
+      = link_to "Закрыть", "javascript:;", class: "back", role: "cancel"

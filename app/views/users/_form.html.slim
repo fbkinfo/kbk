@@ -1,0 +1,13 @@
+= simple_form_for @user do |f|
+  - if current_user.admin?
+    = f.input :name, input_html: { size: 50 }
+  = f.input :email, input_html: { size: 50 }
+  - if current_user.admin?
+    = f.input :role, include_blank: false
+    = f.input :blocked
+  - if f.object.persisted?
+    = f.input :password, input_html: { role: 'password-input', size: 50 }
+    = f.input :password_confirmation, input_html: { size: 50 }
+
+  .actions
+    = f.submit 'Сохранить изменения', class: 'big-green-button is-compact'

@@ -1,0 +1,510 @@
+article.is-investigation
+  +inline-block
+  padding-top: 75px
+  width: 660px
+  padding-right: 20px
+
+  .link-back
+    font-size: 15px
+    font-weight: bold
+    +with-icon("arrow_left", -13px, 6)
+    color: #333
+
+  .investigation-title
+    font-family: $headers-font
+    font-weight: bold
+    font-size: 24px
+    margin-top: 14px
+    line-height: 30px
+    .investigation-date
+      font: normal 15px $default-font
+      color: #7d7d7d
+      margin-left: 13px
+      vertical-align: bottom
+      line-height: 28px
+      white-space: nowrap
+
+    &.is-incoming
+      color: $in-color
+      +with-icon('doc_in_white', 10px, 10px)
+      &:before
+        content: ''
+        left: 0
+        top: 0
+        width: 35px
+        height: 100%
+        background: $in-color
+        position: absolute
+    &.is-outgoing
+      color: $out-color
+
+  .investigation-description
+    margin-top: 20px
+    font-size: 15px
+    line-height: 18px
+    color: #333
+    padding-bottom: 15px
+    margin-bottom: 15px
+    border-bottom: 1px solid #deddd8
+    p
+      font-size: 15px
+      margin: 4px 0
+    em
+      font-style: italic
+
+  .investigation-properties
+    margin-top: 12px
+    line-height: 28px
+    dt, dd
+      +inline-block
+    dt
+      width: 125px
+      text-align: right
+      margin-right: 20px
+      color: #7d7d7d
+    dd
+      width: 490px
+      a
+        color: #2e7fd0
+
+  .investigation-table-view
+    margin-right: -272px
+    display: none
+
+.investigation-side
+  +inline-block
+  vertical-align: top
+  background-image: linear-gradient(#ecebdd, #f6f5f0)
+  // background-image: linear-gradient(#ecebdd 0, #f6f5f0 250px)
+  // height: 1000px
+  width: 270px
+  margin-top: 106px
+
+  .side-control-popover
+    width: 160px
+    input[type='text']
+      width: 70px
+
+  .investigation-controls
+    margin: 14px 0 0 10px
+    .investigation-control
+      a.action
+        line-height: 38px
+        font-size: 15px
+        padding-left: 31px
+        color: #333
+      &.is-edit
+        a.action
+          +with-icon('pencil', 10px, 1px)
+      &.is-duplicate
+        a.action
+          +with-icon('copy', 10px, 1px)
+
+      &.is-download
+        a.action
+          margin-right: 10px
+          +with-icon('pdf', 10px, 1px)
+      &.is-connect
+        a.action
+          +with-icon('doc_new_dark', 10px, 1px)
+      &.is-delete
+        margin-top: 21px
+        opacity: .5
+        a.action
+          +with-icon('trash', 10px, 1px)
+
+.investigation-status
+  line-height: 30px
+  background: #f4e269
+  padding-left: 10px
+  padding-right: 10px
+  +inline-block
+  font-style: italic
+  color: #685602
+  .investigation-status-edit
+    +inline-block
+    border-left: 2px solid #fff
+    padding-left: 10px
+    margin-left: 10px
+    height: 30px
+    width: 30px
+    background: image-url('icons/pencil.png') no-repeat center center
+
+
+.investigation-display-mode
+  float: right
+  label
+    +inline-block
+    input
+      display: none
+  span
+    +inline-block
+    cursor: pointer
+    line-height: 33px
+    padding-right: 14px
+    position: relative
+    border-radius: 4px
+    padding-left: 28px
+    font-size: 14px
+
+  input:checked + span
+    +box-shadow(0 1px 6px rgba(0,0,0,.3) inset)
+    background: #666666
+    color: #fff
+
+  .is-thread, .is-table
+    color: #666666
+    span
+      &:before
+        content: ''
+        position: absolute
+        bottom: 8px
+        left: 28px
+        right: 14px
+        border-bottom: 1px dotted #666666
+
+  .is-thread
+    span
+      +with-icon('thread_gray', 8px, 10px)
+    input:checked + span
+      +with-icon('thread_white', 8px, 10px)
+  .is-table
+    span
+      +with-icon('table_gray', 8px, 8px)
+    input:checked + span
+      +with-icon('table_white', 8px, 8px)
+
+
+.investigations-thread
+  padding-top: 50px
+  .thread-document
+    +box-shadow(0 0 5px 0 rgba(0, 0, 0, .2))
+    +border-radius(5px)
+    background: #fff
+    padding: 15px 5px 10px
+    position: relative
+    width: 410px
+    margin-bottom: 30px
+
+    .thread-document-snapshots
+      display: none
+
+    .thread-document-add
+      position: absolute
+      right: 490px
+      top: 16px
+      +sized-sprite($icons, 'doc_new_gray')
+      &:hover
+        +sized-sprite($icons, 'doc_new_dark')
+    .thread-document-date
+      position: absolute
+      right: 490px
+      width: 70px
+      top: 20px
+      font-size: 12px
+      color: #7c7c7c
+      .thread-document-date-overtime
+        font-size: 11px
+        color: #cc0000
+        margin-top: 5px
+    .thread-document-icon
+      width: 34px
+      top: 5px
+      bottom: 5px
+
+    .thread-document-remove
+      position: absolute
+      left: -70px
+      top: 58px
+      color: #cc0000
+      border-bottom: 1px dotted #cc0000
+      font-size: 12px
+      text-decoration: none
+      +inline-block
+
+    &.is-video, &.is-photo
+      width: 640px
+      border: 0
+      padding: 0
+      .thread-document-date
+        right: 640px
+
+    &.is-photo
+      .thread-document-photo-comment
+        text-align: center
+        padding: 4px 0
+        font-size: 14px
+        position: absolute
+        width: 100%
+        bottom: 0
+        span
+          +inline-block
+          width: 100%
+
+    &.is-link
+      background: #fbf3c4
+      border: 0
+      +border-radius(0)
+      +box-shadow(0 0 0 0)
+      width: 595px
+      padding-left: 40px
+      .thread-document-date
+        right: 640px
+      .thread-document-title a
+        color: #008aff
+        text-decoration: underline
+
+      .thread-document-source
+        font-size: 13px
+        margin: 8px 0
+
+
+    &.is-outgoing
+      margin-left: 82px
+      padding-left: 54px
+      padding-right: 16px
+      .thread-document-icon
+        +border-radius(5px 0 0 5px)
+        background-color: $out-color
+        +with-icon('doc_out_white', 10px, 10px)
+        position: absolute
+        left: 5px
+
+    &.is-incoming
+      margin-left: 162px
+      padding-left: 16px
+      padding-right: 54px
+      .thread-document-date
+        right: 570px
+      .thread-document-title
+        a
+          color: $in-color
+      .thread-document-icon
+        +border-radius(0 5px 5px 0)
+        background-color: $in-color
+        +with-icon('doc_in_white', 10px, 10px)
+        position: absolute
+        right: 5px
+      .thread-document-links
+        right: -308px
+
+
+    .thread-document-title
+      a
+        text-decoration: none
+        font-size: 18px
+        font-weight: bold
+        color: $out-color
+        &:hover
+          text-decoration: underline
+    .thread-document-text
+      font-size: 14px
+      line-height: 20px
+      margin-top: 5px
+
+    .thread-document-info
+      margin-top: 10px
+      padding: 11px
+      padding-left: 16px
+      +border-radius(5px 0 0 5px)
+      +background-image(linear-gradient(left, #f9f8f3, #fff))
+      .thread-document-info-place
+        padding-left: 20px
+        +with-icon('building', 0, -1px)
+        font-size: 12px
+      .thread-document-info-author
+        padding-left: 20px
+        margin-top: 12px
+        +with-icon('human', 1px, -1px)
+        &.is-alien
+          +with-icon('alien', 1px, -1px)
+
+  .thread-document-published-separator
+    margin-bottom: 26px
+    font-size: 20px
+    border: 1px black solid
+    padding: 8px
+
+.thread-document
+  &.is-outgoing + &.is-outgoing.is-joined, &.is-incoming + &.is-incoming.is-joined
+    margin-top: -29px
+    +border-radius(0 0 5px 5px)
+    &:before
+      content: ''
+      width: 100%
+      height: 5px
+      background: #fff
+      position: absolute
+      top: -6px
+      left: 0
+      border-bottom: 1px dashed #c5c4c2
+
+  &.is-outgoing + &.is-incoming.is-joined, &.is-incoming + &.is-outgoing.is-joined
+    margin-top: -30px
+    +border-radius(0 5px 5px 5px)
+    &:before
+      content: ''
+      width: 400px
+      height: 5px
+      background: #fff
+      position: absolute
+      top: -5px
+      left: 0
+
+  &.is-incoming + &.is-outgoing.is-joined
+    +border-radius(5px 0 5px 5px)
+    &:before
+      left: auto
+      right: 0
+
+.thread-document-links
+  width: 268px
+  position: absolute
+  right: -388px
+  top: 0
+  font-size: 11px
+  .thread-document-link
+    +box-shadow(0 0 5px 0 rgba(0, 0, 0, .2))
+    background-color: #fff
+    +border-radius(5px)
+    padding: 19px
+    padding-right: 40px
+    margin-bottom: 10px
+    position: relative
+    &:before
+      content: ''
+      width: 200px
+      height: 1px
+      border-top: 1px dotted $in-color
+      position: absolute
+      right: 100%
+      top: 23px
+      z-index: -1
+
+    .thread-document-link-date
+      +inline-block
+      color: #ccc
+    .thread-document-link-type
+      +inline-block
+    .thread-document-link-link
+      font-size: 14px
+      margin-top: 6px
+      a
+        color: $in-color
+        text-decoration: underline
+
+    &.is-response
+      .thread-document-scroll-link
+        position: absolute
+        top: 10px
+        right: 10px
+        a
+          +inline-block
+          +sized-sprite($icons, "link_up")
+    &.is-cause
+      .thread-document-scroll-link
+        position: absolute
+        bottom: 10px
+        right: 10px
+        a
+          +inline-block
+          +sized-sprite($icons, "link_down")
+
+    &.is-outgoing
+      &:before
+        border-top: 1px dotted $out-color
+      .thread-document-link-link
+        a
+          color: $out-color
+
+span.spacer
+  color: #cccccc
+
+.modal-form
+  display: none
+  padding: 0 10px
+  h1
+    margin: 4px 0
+    font-size: 18px
+    input
+      +border-radius(2px)
+      border: 1px solid #9c9d9f
+      margin-left: 8px
+      width: 120px
+      height: 32px
+      font-size: 14px
+      padding: 6px 8px
+      color: #474f5b
+  .input
+    input.string
+      width: 100%
+      +border-radius(2px)
+      border: 1px solid #9c9d9f
+      height: 32px
+      font-size: 14px
+      padding: 6px 8px
+    label
+      display: block
+      margin: 6px 0 4px
+      abbr
+        display: none
+    textarea
+      color: #474f5b
+      padding: 10px
+      width: 100%
+      +border-radius(2px)
+      border: 1px solid #9c9d9f
+      height: 70px
+    .hint
+      +inline-block
+      color: #666666
+      font-style: italic
+      font-size: 12px
+      margin: 6px 0 6px
+
+  .actions
+    margin-top: 10px
+
+    .submit
+      cursor: hand
+      background-color: #568815
+      padding: 4px
+      width: 200px
+      height: 38px
+      border: 0
+      font-size: 14px
+      color: #f1f4ec
+    .back
+      +inline-block
+      margin-top: 4px
+      color: #333333
+      margin-left: 20px
+
+  .add-photo
+    clear: both
+    border: 1px solid black
+    height: 12px
+    padding: 14px 20px
+    a
+      color: #2d7fd0
+
+  .photos-list
+    li
+      border: 1px solid black
+      padding: 2px
+      height: 136px
+      margin-bottom: 10px
+      .photo
+        float: left
+        display: inline-block
+        width: 120px
+        height: 120px
+      .comment
+        display: inline-block
+
+  .photo-upload-status
+    display: none
+    background: #f6f5f0
+    border: 1px solid black
+    height: 12px
+    padding: 14px 20px

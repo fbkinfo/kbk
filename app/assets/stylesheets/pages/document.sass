@@ -1,0 +1,199 @@
+article.is-document
+  +inline-block
+  padding-top: 75px
+  width: 660px
+  padding-right: 20px
+
+  &>a>img
+    margin-top: 30px
+    border: 1px solid gray
+
+  .link-back
+    font-size: 15px
+    font-weight: bold
+    color: #333
+    +with-icon("arrow_left", -13px, 6)
+
+  .document-title
+    font-family: $headers-font
+    font-weight: bold
+    font-size: 38px
+    margin-top: 14px
+    line-height: 42px
+    padding-left: 45px
+    .document-date
+      font: normal 15px $default-font
+      color: #7d7d7d
+      margin-left: 13px
+      vertical-align: bottom
+      line-height: 28px
+      white-space: nowrap
+
+    &.is-incoming
+      color: $in-color
+      +with-icon('doc_in_white', 10px, 10px)
+      &:before
+        content: ''
+        left: 0
+        top: 0
+        width: 35px
+        height: 100%
+        background: $in-color
+        position: absolute
+    &.is-outgoing
+      color: $out-color
+      +with-icon('doc_out_white', 10px, 10px)
+      &:before
+        content: ''
+        left: 0
+        top: 0
+        width: 35px
+        height: 100%
+        background: $out-color
+        position: absolute
+
+  .document-description
+    margin-top: 20px
+    font-size: 15px
+    line-height: 18px
+    color: #333
+    padding-bottom: 20px
+    border-bottom: 1px solid #deddd8
+
+  .document-properties
+    margin-top: 12px
+    line-height: 28px
+    dt, dd
+      +inline-block
+    dt
+      width: 125px
+      text-align: right
+      margin-right: 20px
+      color: #7d7d7d
+    dd
+      width: 490px
+      a
+        color: #2e7fd0
+
+
+.document-side
+  +inline-block
+  vertical-align: top
+  background-image: linear-gradient(#ecebdd 0, #f6f5f0 250px)
+  height: 1000px
+  width: 270px
+  margin-top: 106px
+
+  .document-controls
+    margin: 14px 0 0 10px
+    .document-control
+      font-size: 11px
+      a.action
+        line-height: 38px
+        font-size: 15px
+        padding-left: 31px
+        color: #333
+      &.is-edit
+        a.action
+          +with-icon('pencil', 10px, 1px)
+      &.is-duplicate
+        a.action
+          +with-icon('copy', 10px, 1px)
+
+      &.is-download
+        a.action
+          margin-right: 10px
+          +with-icon('pdf', 10px, 1px)
+      &.is-connect
+        a.action
+          +with-icon('doc_new_dark', 10px, 1px)
+      &.is-delete
+        margin-top: 21px
+        a.action
+          opacity: .5
+          +with-icon('trash', 10px, 1px)
+
+.related-documents
+  margin-top: 30px
+
+.related-document
+  &:after
+    position: absolute
+    content: ''
+    width: 10px
+    top: 5px
+    bottom: 5px
+
+  &.is-current
+    margin-left: -5px
+    z-index: 2
+    &.is-incoming
+      border: 5px solid $in-color
+    &.is-outgoing
+      border: 5px solid $out-color
+    &:before
+      content: none !important
+
+    .related-document-date
+      color: #8c8c8c
+
+  &.is-incoming
+    margin-left: 45px
+    &:after
+      +border-radius(0 5px 5px 0)
+      background-color: $in-color
+      right: 5px
+  &.is-outgoing
+    &:after
+      +border-radius(5px 0 0 5px)
+      background-color: $out-color
+      left: 5px
+
+  +box-shadow(0 0 5px 0 rgba(0, 0, 0, .2))
+  background-color: #fff
+  padding: 15px 28px
+  width: 165px
+  position: relative
+  +border-radius(5px)
+  .related-document-title
+    font-size: 13px
+    color: #8c8c8c
+    margin-bottom: 10px
+    a
+      color: #000
+  .related-document-date
+    font-size: 11px
+    color: #000
+
+  .selectize-input
+    width: 200px
+
+
+  &.is-outgoing + &.is-outgoing, &.is-incoming + &.is-incoming
+    +border-radius(0 0 5px 5px)
+    &:before
+      content: ''
+      width: 100%
+      height: 5px
+      background: #fff
+      position: absolute
+      top: -6px
+      left: 0
+      border-bottom: 1px dashed #c5c4c2
+
+  &.is-outgoing + &.is-incoming, &.is-incoming + &.is-outgoing
+    +border-radius(0 5px 5px 5px)
+    &:before
+      content: ''
+      width: 176px
+      height: 5px
+      background: #fff
+      position: absolute
+      top: -5px
+      left: 0
+
+  &.is-incoming + &.is-outgoing
+    +border-radius(5px 0 5px 5px)
+    &:before
+      left: auto
+      right: 0

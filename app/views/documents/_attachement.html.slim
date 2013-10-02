@@ -1,0 +1,7 @@
+li.document-attachment(
+  id="attachement_#{attachement.id}"
+  data-id=attachement.id
+  role="list-item"
+)
+  =' link_to attachement.filename, attachement.file.url, target: '_blank'
+  = link_to "[x]", attachement_path(attachement), method: :delete, remote: true, role: "remove-link"

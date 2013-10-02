@@ -1,0 +1,58 @@
+- document = entry.resource
+- prev_doc = prev_entry.try(:resource)
+- next_doc = next_entry.try(:resource)
+
+- joined = document.responded? && document.response == prev_doc
+.thread-document(
+  class="is-#{document.kind} #{joined ? 'is-joined' : ''}"
+  id="document_#{document.id}"
+  role="thread-document"
+  data-document-id=document.id
+)
+  .thread-document-snapshots(role="document-preview")
+    - SnapshotDecorator.decorate_collection(document.snapshots).each do |snapshot|
+      .snapshot(data-url=snapshot.scan.url)
+  .thread-document-date
+    = l document.document_date, format: :thread_full
+    - if document.overdue?
+      .thread-document-date-overtime
+        | Просрочен на #{document.overtime} #{Russian.pluralize(document.overtime, 'день', 'дня', 'дней')}
+  a.thread-document-add{href=new_document_path(cause_id: document.id)}
+  .thread-document-icon
+  .thread-document-title
+    a href=document_path(document)
+      = document.title
+  .thread-document-text
+    = auto_link document.description
+  .thread-document-info
+    .thread-document-info-place
+      = t(document.kind, scope: "models.investigation.action_info").html_safe
+      = link_to document.organization.name, organization_path(document.organization)
+    .thread-document-info-author.is-alien
+      = document.author.name
+
+  - if (document.responded? && document.response != prev_doc) || (document.caused? && document.cause != next_doc)
+    .thread-document-links
+      / Если на этот документ ответили — то ссылка на ответ
+      - if document.responded? && document.response != prev_doc
+        .thread-document-link.is-response class="is-#{document.response.kind}"
+          .thread-document-link-date
+            | #{l document.response.document_date, format: :short} —&nbsp;
+          .thread-document-link-type
+            | Ответ:
+          .thread-document-link-link
+            = link_to document.response.title, document_path(document.response)
+          .thread-document-scroll-link
+            = link_to '', "#document_#{document.response.id}"
+
+      / Если этот документ — это ответ на другой документ — то ссылка на тот документ
+      - if document.caused? && document.cause != next_doc
+        .thread-document-link.is-cause class="is-#{document.cause.kind}"
+          .thread-document-link-date
+            | #{l document.cause.document_date, format: :short} —&nbsp;
+          .thread-document-link-type
+            | Ответ на:
+          .thread-document-link-link
+            = link_to document.cause.title, document_path(document.cause)
+          .thread-document-scroll-link
+            = link_to '', "#document_#{document.cause.id}"

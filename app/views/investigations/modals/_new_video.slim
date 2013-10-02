@@ -1,0 +1,13 @@
+.modal-form(role="new-video-modal")
+  = simple_form_for @investigation.videos.new do |f|
+    = f.hidden_field :investigation_id
+
+    h1
+      | Добавление видео от
+      = f.text_field :entry_date, role: "datepicker", required: true
+
+    = f.input :body, hint: "Код или ссылка на видео в Youtube или Vimeo"
+
+    .actions
+      = f.submit "Опубликовать", class: "submit"
+      = link_to "Закрыть", "javascript:;", class: "back", role: "cancel"

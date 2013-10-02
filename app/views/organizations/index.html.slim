@@ -1,0 +1,35 @@
+- content_for :add do
+  .big-green-button.add-new-object.is-new-organization
+    = link_to 'Добавить организацию', new_organization_path
+
+table.index-list.organizations-list
+  thead.index-list-header
+    tr
+      th.is-name class=sort_class?('name')
+        a href=sort_by('name')
+          | Название организации
+      th.is-documents-count class=sort_class?('documents_count')
+        a href=sort_by('documents_count')
+          | Документы
+      th.is-investigations-count class=sort_class?('investigations_count')
+        a href=sort_by('investigations_count')
+          | Дела
+      th.is-created class=sort_class?('created_at')
+        a href=sort_by('created_at')
+          | Создана
+
+  tbody
+    - @organizations.each do |e|
+      tr id="organization-#{e.id}"
+        td.is-name
+          a name="organization-#{e.id}"
+          a.table-document-name href=edit_organization_path(e)
+            = e.name
+        td.is-documents-count
+          = e.documents_count
+        td.is-investigations-count
+          = e.investigations_count
+        td.is-created
+          = l e.created_at.to_date, format: :short
+
+= paginate @organizations

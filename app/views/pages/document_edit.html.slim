@@ -1,0 +1,31 @@
+article.is-form
+
+  = link_to 'Вернуться к списку документов', '#', class: 'link-back'
+
+  h1.form-title.is-document-edit.penciled
+    | Добавление документа
+
+  = simple_form_for :document do |f|
+    fieldset.document-properties
+      = f.input :direction,
+              :collection => [['incoming', 'Входящий'], ['outgoing', 'Исходящий']],
+              :label_method => :last,
+              :value_method => :first,
+              :as => :radio_buttons,
+              :checked => 'incoming',
+              :required => false,
+              :label => false
+
+      = f.input :document_date, as: :datepicker, required: false, label: 'Дата на документе'
+      = f.input :answer_date, as: :datepicker, required: false, label: 'Срок ответа'
+    = f.input :name, as: :string, required: false, label: 'Название'
+    = f.input :description, as: :text, required: false, label: 'Описание'
+
+    = f.input :organization, as: :custom_select, required: false, label: 'Организация'
+    = f.input :case, as: :custom_select, required: false
+    = f.input :author, as: :custom_select, required: false
+
+    .actions
+      = f.submit 'Сохранить изменения', class: 'big-green-button is-small'
+
+

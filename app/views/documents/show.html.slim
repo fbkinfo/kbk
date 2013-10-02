@@ -1,0 +1,76 @@
+article.is-document
+  = link_to 'Документы', documents_path, class: 'link-back'
+
+  h1.document-title class="is-#{@document.kind}"
+    = @document.title
+    span.document-date
+      = l @document.document_date
+
+  p.document-description= auto_link @document.description
+
+  dl.document-properties
+    dt Дата на документе:
+    dd= l @document.document_date
+
+    dt Загружен:
+    dd= l @document.created_at.to_date
+
+    dt Срок ответа:
+    dd
+      - if @document.due_date
+        = l @document.due_date
+        - if @document.responded?
+          i (ответ отправлен)
+      - else
+        span.spacer
+          | &mdash;
+
+    dt Организация:
+    dd= link_to @document.organization.name, @document.organization
+
+    dt Дело:
+    dd= link_to @document.investigation.title, @document.investigation
+
+    dt Автор:
+    dd= @document.author.name
+
+  - @snapshots.each do |s|
+    a href=s.scan.url target="_blank"
+      img.snapshot src=s.scan.url(:preview)
+
+.document-side
+  - if user_signed_in?
+    ul.document-controls
+      li.document-control.is-edit
+        = link_to 'Редактировать', edit_document_path(@document), class: "action"
+      - if false
+        li.document-control.is-duplicate
+          = link_to 'Создать копию', '#', class: "action"
+      - if @snapshots.any?
+        li.document-control.is-download
+          = link_to 'Скачать скан документа', document_path(@document, format: :pdf), class: "action"
+          | PDF
+      li.document-control.is-connect
+        = link_to 'Добавить связанный', new_document_path(cause_id: @document.id), class: "action"
+
+      - if @document.user == current_user || current_user.admin?
+        li.document-control.is-delete
+          - if !@document.responded?
+            = link_to 'Удалить документ', @document, method: :delete, data: {confirm: "Вы уверены?"}, class: "action"
+          - else
+            = link_to 'Как удалить этот документ?', '#', role: "delete-instructions-link", class: "action"
+          - if @document.responded?
+            .side-control-popover(role="delete-instructions-popover")
+              | Для того, чтобы удалить текущий документ, необходимо разорвать связь между ним и тем документом, который был получен в ответ.
+              .popover-linked
+                = link_to @document.response.title, @document.response
+                span= l @document.response.document_date, format: :thread_short
+
+  .related-documents
+    - if @document.cause
+      = render 'related_doc', document: @document.cause, current: false
+
+    = render 'related_doc', document: @document, current: true
+
+    - @document.responses.each do |d|
+      = render 'related_doc', document: d, current: false

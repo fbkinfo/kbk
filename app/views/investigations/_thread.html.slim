@@ -1,0 +1,3 @@
+.investigations-thread
+  - @timeline_entries.each_with_index do |entry, index|
+    = render 'entry', entry: entry, prev_entry: @timeline_entries[index - 1], next_entry: @timeline_entries[index + 1]

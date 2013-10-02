@@ -1,0 +1,54 @@
+article.is-document
+  = link_to 'События', '#', class: 'link-back'
+
+  h1.document-title.is-incoming
+    | Решение первой инстанции <br/>отменено
+    span.document-date
+      | 22 августа 2013
+
+  p.document-description
+    | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    | tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    | quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    | consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    | cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    | proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+  dl.document-properties
+    dt Дата на документе:
+    dd 10 июля 2013
+
+    dt Загружен:
+    dd 22 августа 2013
+
+    dt Срок ответа:
+    dd 13 августа 2013 <i>(ответ отправлен)</i>
+
+    dt Организация:
+    dd= link_to 'Девятый арбитражный апелляционный суд', '#'
+
+    dt Дело:
+    dd= link_to 'Торги по продаже федерального имущества в Екатеринбурге'
+
+    dt Автор:
+    dd А. И. Трубицин
+
+.document-side
+  ul.document-controls
+    li.document-control.is-edit
+      = link_to '#' do
+        | Редактировать
+    li.document-control.is-duplicate
+      = link_to '#' do
+        | Создать копию
+    li.document-control.is-download
+      = link_to '#' do
+        | Скачать скан документа
+      | PDF
+    li.document-control.is-connect
+      = link_to '#' do
+        | Добавить связанный
+
+    li.document-control.is-delete
+      = link_to '#' do
+        | Как удалить этот документ?

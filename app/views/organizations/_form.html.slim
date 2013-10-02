@@ -1,0 +1,5 @@
+= simple_form_for @organization do |f|
+  = f.input :name,  input_html: { class: 'long' }
+
+  .actions
+    = f.submit 'Сохранить изменения', class: 'big-green-button is-compact'
