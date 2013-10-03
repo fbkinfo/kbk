@@ -1,7 +1,7 @@
 Код для борьбы с коррупцией (КБК)
 ===
 
-[![Build Status](https://api.travis-ci.org/fbkinfo/kbk.png)](https://magnum.travis-ci.com/evilmartians/kbk)
+[![Build Status](https://api.travis-ci.org/fbkinfo/kbk.png)](https://travis-ci.org/fbkinfo/kbk)
 [![Code Climate](https://codeclimate.com/github/fbkinfo/kbk.png)](https://codeclimate.com/github/fbkinfo/kbk)
 
 ## Установка
