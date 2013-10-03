@@ -7,13 +7,14 @@
 ## Установка
 
 1. Убедиться, что установлен psql >= 9.1
-2. `bundle install`
+2. Выполнить `bundle install`
 3. Скопировать `config/database.yml.sample` без `.sample` и заполнить реальными данными для доступа к БД
-4.
-
+4. Инициировать базу:
+    ```ruby
     rake db:create
     rake db:migrate
     rake db:seed
+    ```
 
 5. Запустить сервер: rails s
 
