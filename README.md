@@ -31,7 +31,7 @@ http://stackoverflow.com/questions/17072683/rmagick-not-opening-multi-page-pdfs-
 
 Для выкладки (deploy), у вас должен быть доступ к репозиторию kbk-config.
 
-1. Добавьте этот репозиторий как сабмодуль: `git submodule add -f git@github.com:evilmartians/kbk-config.git deploy`
+1. Добавьте этот репозиторий как сабмодуль: `git submodule add -f git@github.com:fbkinfo/kbk-config.git deploy`
 2. Выполните `rake app:bootstrap_deploy` для линковки конфигов
 
 После этого можно использовать команды `cap production/staging deploy`
