@@ -16,9 +16,15 @@ class DocumentAttachementsController < ApplicationController
 
   def destroy
     attachement = DocumentAttachement.find(params[:id])
-    attachement.destroy
 
-    render nothing: true
+    policy = AttachedDestroyPolicy.new(attachement)
+
+    if policy.allowed?
+      attachement.destroy
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 
   private

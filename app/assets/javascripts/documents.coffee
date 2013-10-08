@@ -105,6 +105,9 @@ class Documents
         ids = $(list.ids).find("input[value=#{item.data('id')}]").remove()
         item.fadeOut(-> $(@).remove())
 
+      $(list.selector).on 'ajax:error', '@remove-link', ->
+        alert "У документа должен быть хотя бы один скан или вложение"
+
   # TODO: Split further
   setupSnapshotsUploadAndSort: ->
     snapshotsIds    = $('.document-snapshot-ids')

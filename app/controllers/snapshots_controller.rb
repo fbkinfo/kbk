@@ -14,8 +14,15 @@ class SnapshotsController < ApplicationController
 
   def destroy
     snapshot = Snapshot.find(params[:id])
-    snapshot.destroy
-    render nothing: true
+
+    policy = AttachedDestroyPolicy.new(snapshot)
+
+    if policy.allowed?
+      snapshot.destroy
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 
   def create
