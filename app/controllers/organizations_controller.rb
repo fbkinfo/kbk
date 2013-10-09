@@ -2,6 +2,8 @@ class OrganizationsController < ApplicationController
 
   before_filter :authenticate_user!
 
+  respond_to :html
+
   def index
     @sorter = OrganizationsSorter.new(params[:s])
     @organizations = @sorter.apply(Organization.all).page(params[:page])
