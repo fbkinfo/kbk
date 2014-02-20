@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
 
-gem 'rails', '4.0.2'
+gem 'rails', '4.0.3'
 
 gem 'pg'
 
@@ -10,11 +10,11 @@ gem 'prawn-fast-png'
 gem 'ancestry'
 gem 'russian'
 gem 'draper'
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 4.0.1'
 
 gem 'plupload-rails', github: 'gucki/plupload-rails'
 
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.0.1'
 gem 'therubyracer',  platform: 'ruby'
 
 gem 'uglifier', '>= 1.3.0'
@@ -30,7 +30,7 @@ gem 'rdiscount'
 
 gem 'rails_config'
 
-gem "compass-rails", "~> 2.0.alpha.0"
+gem "compass-rails", github: 'Compass/compass-rails', branch: '2-0-stable'
 gem "selectize-rails"
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
