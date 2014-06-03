@@ -2,14 +2,14 @@ class FavouritesController < ApplicationController
   before_filter :authenticate_user!
 
   def create
-    user_favoutires = UserFavourites.new(current_user)
-    user_favoutires.add(resource)
+    user_favourites = UserFavourites.new(current_user)
+    user_favourites.add(resource)
     render nothing: true
   end
 
   def destroy
-    user_favoutires = UserFavourites.new(current_user)
-    user_favoutires.remove(resource)
+    user_favourites = UserFavourites.new(current_user)
+    user_favourites.remove(resource)
     render nothing: true
   end
 
